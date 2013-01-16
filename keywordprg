@@ -5,11 +5,22 @@
 
 import argparse
 import subprocess
+import sys
 
 __docformat__ = "restructuredtext en"
 
 def main():
     options = _parse_args()
+
+    keyword = options.keyword[0]
+
+    try:
+        findings = subprocess.check_output(["locate", "-b", r"\{0}.pdf".format(keyword)]).split(b"\n")
+        subprocess.check_call(["xdg-open", findings[0]])
+    except subprocess.CalledProcessError as e:
+        print(e)
+        sys.exit(1)
+
 
 
 def _parse_args():
@@ -20,7 +31,7 @@ def _parse_args():
     :rtype: Namespace
     """
     parser = argparse.ArgumentParser(description="")
-    parser.add_argument("args", metavar="keyword", type=str, nargs=1, help="Positional arguments.")
+    parser.add_argument("keyword", metavar="keyword", type=str, nargs=1, help="Positional arguments.")
 
     return parser.parse_args()
 
