@@ -23,7 +23,8 @@ def main():
     keyword = options.keyword[0]
 
     try:
-        findings = subprocess.check_output(["locate", "-b", r"\{0}.pdf".format(keyword)]).split(b"\n")
+        command = ["locate", "-b", r"\{0}.pdf".format(keyword)]
+        findings = subprocess.check_output(command).split(b"\n")
         subprocess.check_call(["xdg-open", findings[0]])
     except subprocess.CalledProcessError as e:
         print(e)
