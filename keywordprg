@@ -38,7 +38,7 @@ def _parse_args():
     :rtype: Namespace
     """
     parser = argparse.ArgumentParser(description="")
-    parser.add_argument("keyword", metavar="keyword", type=str, nargs=1, help="Package Name")
+    parser.add_argument("keyword", metavar="keyword", type=str, nargs=1, help="Package name or keyword")
 
     return parser.parse_args()
 
