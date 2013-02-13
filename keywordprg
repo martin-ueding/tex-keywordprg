@@ -3,6 +3,14 @@
 
 # Copyright © 2013 Martin Ueding <dev@martin-ueding.de>
 
+"""
+This will find the LaTeX documentation for a given package.
+
+You can use this as a keywordprg in Vim, so that you can move the cursor over
+``package`` in ``\includepackage{package}`` and press ``K``. Then, it will
+search for ``package.pdf`` on your disk and open it in your default PDF viewer.
+"""
+
 import argparse
 import subprocess
 import sys
@@ -21,8 +29,6 @@ def main():
         print(e)
         sys.exit(1)
 
-
-
 def _parse_args():
     """
     Parses the command line arguments.
@@ -31,10 +37,9 @@ def _parse_args():
     :rtype: Namespace
     """
     parser = argparse.ArgumentParser(description="")
-    parser.add_argument("keyword", metavar="keyword", type=str, nargs=1, help="Positional arguments.")
+    parser.add_argument("keyword", metavar="keyword", type=str, nargs=1, help="Package Name")
 
     return parser.parse_args()
-
 
 if __name__ == "__main__":
     main()
