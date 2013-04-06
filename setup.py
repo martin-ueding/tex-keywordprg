@@ -13,8 +13,8 @@ setup(
     classifiers=[
         "Environment :: Plugins",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT"
-        "Programming Language :: Python",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
         "Topic :: Text Editors",
 
     ],
