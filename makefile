@@ -1,10 +1,9 @@
 # Copyright © 2013 Martin Ueding <dev@martin-ueding.de>
 
 all:
-	@echo "Nothing to do."
 
 install:
-	./setup.py install --prefix "$(DESTDIR)" --install-layout deb
+	./setup.py install --prefix "$(DESTDIR)/usr" --install-layout deb
 
 .PHONY: clean
 clean:
