@@ -9,8 +9,6 @@ This will find the LaTeX documentation for a given package.
 You can use this as a keywordprg in Vim, so that you can move the cursor over
 ``package`` in ``\includepackage{package}`` and press ``K``. Then, it will
 search for ``package.pdf`` on your disk and open it in your default PDF viewer.
-
-:license: MIT
 """
 
 import argparse
