@@ -25,7 +25,7 @@ patterns = [
 def search_for_file(filename):
     try:
         command = ["locate", "-b", filename]
-        print(command)
+        print('Executing', command)
         findings = subprocess.check_output(command).split(b"\n")[:-1]
         return findings
     except subprocess.CalledProcessError as e:
@@ -44,9 +44,9 @@ def main():
 
     for pattern in patterns:
         filename = pattern.format(options.keyword)
-        print(filename)
+        print('Looking for', filename)
         findings = search_for_file(filename)
-        print(findings)
+        print('Found', findings)
 
         if len(findings) > 0:
             open_path(findings[0])
