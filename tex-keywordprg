@@ -17,15 +17,18 @@ import sys
 
 __docformat__ = "restructuredtext en"
 
+patterns = [
+    r'\{}.pdf',
+    r'\{}.pdf.gz',
+]
+
 def search_for_file(filename):
     try:
-        command = ["locate", "-b", r"{}.pdf".format(filename)]
+        command = ["locate", "-b", filename]
         print(command)
         findings = subprocess.check_output(command).split(b"\n")[:-1]
-        print(findings)
         return findings
     except subprocess.CalledProcessError as e:
-        print(e)
         return []
 
 def open_path(path):
@@ -38,9 +41,16 @@ def open_path(path):
 def main():
     options = _parse_args()
 
-    search_for_file(options.keyword)
 
+    for pattern in patterns:
+        filename = pattern.format(options.keyword)
+        print(filename)
+        findings = search_for_file(filename)
+        print(findings)
 
+        if len(findings) > 0:
+            open_path(findings[0])
+            break
 
 
 def _parse_args():
