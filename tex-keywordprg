@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# Copyright © 2013 Martin Ueding <dev@martin-ueding.de>
+# Copyright © 2013-2014 Martin Ueding <dev@martin-ueding.de>
 
 """
 This will find the LaTeX documentation for a given package.
@@ -17,18 +17,31 @@ import sys
 
 __docformat__ = "restructuredtext en"
 
-def main():
-    options = _parse_args()
-
-    keyword = options.keyword[0]
-
+def search_for_file(filename):
     try:
-        command = ["locate", "-b", r"\{0}.pdf".format(keyword)]
-        findings = subprocess.check_output(command).split(b"\n")
-        subprocess.check_call(["xdg-open", findings[0]])
+        command = ["locate", "-b", r"\{0}.pdf".format(filename)]
+        print(command)
+        findings = subprocess.check_output(command).split(b"\n")[:-1]
+        print(findings)
+        return findings
+    except subprocess.CalledProcessError as e:
+        print(e)
+        return []
+
+def open_path(path):
+    try:
+        subprocess.check_call(["xdg-open", path])
     except subprocess.CalledProcessError as e:
         print(e)
         sys.exit(1)
+
+def main():
+    options = _parse_args()
+
+    search_for_file(options.keyword)
+
+
+
 
 def _parse_args():
     """
@@ -38,7 +51,7 @@ def _parse_args():
     :rtype: Namespace
     """
     parser = argparse.ArgumentParser(description="")
-    parser.add_argument("keyword", metavar="keyword", type=str, nargs=1, help="Package name or keyword")
+    parser.add_argument("keyword", help="Package name or keyword")
 
     return parser.parse_args()
 
