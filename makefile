@@ -1,9 +1,10 @@
-# Copyright © 2013 Martin Ueding <dev@martin-ueding.de>
+# Copyright © 2013, 2015 Martin Ueding <dev@martin-ueding.de>
 
 all:
 
 install:
-	./setup.py install --prefix "$(DESTDIR)/usr" --install-layout deb
+	install -d "$(DESTDIR)/usr/bin"
+	install -m 755 tex-keywordprg -t "$(DESTDIR)/usr/bin"
 #
 	install -d "$(DESTDIR)/usr/share/vim/vimfiles/ftplugin/tex"
 	install -m 644 keywordprg.vim -t "$(DESTDIR)/usr/share/vim/vimfiles/ftplugin/tex"
